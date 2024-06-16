@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import MainLayout from './modules/layout/MainLayout'
 import Home from './modules/layout/Home'
+import { ArticleProvider } from './modules/articles/ArticleContext'
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<MainLayout/>}>
+          <Route element={<ArticleProvider><MainLayout/></ArticleProvider>}>
             <Route path='/' element={<Home/>}/>
           </Route>
         </Routes>
