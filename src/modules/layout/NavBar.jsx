@@ -86,7 +86,7 @@ const NavBar = () => {
 
             {
                 loginClick ?
-                    <form onSubmit={(e) => handleSubmitLogin(e)} className="absolute top-[5vw] right-[5vw] z-[20] bg-[rgba(255,255,255,0.5)] w-[300px] h-[300px] rounded-md flex justify-center flex-col items-center">
+                    <form onSubmit={(e) => handleSubmitLogin(e)} className="fixed top-[5vw] right-[5vw] z-[20] bg-[rgba(255,255,255,0.5)] w-[300px] h-[300px] rounded-md flex justify-center flex-col items-center">
                         <span className=" cursor-pointer absolute top-[20px] left-[25px] text-[14px] text-[rgba(255,255,255,0.8)]" onClick={handleClose}><i className="fa-solid fa-x"></i></span>
                         <h1 className="text-[1.4em] font-bold text-[rgba(255,255,255,0.8)]">Login</h1>
                         <div className="flex flex-col mb-[1em]">
@@ -103,7 +103,7 @@ const NavBar = () => {
 
             {
                 registClick ?
-                    <form onSubmit={(e) => handleSubmitRegist(e)} className="absolute top-[5vw] right-[5vw] z-[20] bg-[rgba(255,255,255,0.5)] w-[350px] h-[400px] rounded-md flex justify-center flex-col items-center">
+                    <form onSubmit={(e) => handleSubmitRegist(e)} className="fixed top-[5vw] right-[5vw] z-[20] bg-[rgba(255,255,255,0.5)] w-[350px] h-[400px] rounded-md flex justify-center flex-col items-center">
                         <span className=" cursor-pointer absolute top-[20px] left-[25px] text-[14px] text-[rgba(255,255,255,0.8)]" onClick={handleClose}><i className="fa-solid fa-x"></i></span>
                         <h1 className="text-[1.4em] font-bold text-[rgba(255,255,255,0.8)]">Registrasi</h1>
                         <div className="flex flex-col mb-[1em]">
