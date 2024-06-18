@@ -2,33 +2,37 @@ import { useEffect, useRef } from "react";
 import { useArticle } from "./ArticleContext";
 import { useAuth } from "../auth/AuthContext";
 
-const FormArticleEdit = ({values}) => {
-
-
+/**
+ * Komponen untuk mengedit artikel yang sudah ada.
+ * @param {Object} values - Nilai-nilai awal dari artikel yang akan diedit.
+ */
+const FormArticleEdit = ({ values }) => {
     const title = useRef();
     const article = useRef();
     const image = useRef();
     const categoris = useRef();
 
-    const { updateArticle, kategori ,getKategoriById,kategoriById} = useArticle();
+    const { updateArticle, kategori, getKategoriById, kategoriById } = useArticle();
     const { token } = useAuth();
 
     useEffect(() => {
-        if(values !== undefined){
+        if (values !== undefined) {
             getKategoriById(values.kategoris_id);
         }
-    },[])
-    
-    
+    }, []);
+
     useEffect(() => {
-        if(values !== undefined && kategoriById[0] !== undefined){
+        if (values !== undefined && kategoriById[0] !== undefined) {
             title.current.value = values.title;
             article.current.value = values.article;
             categoris.current.value = kategoriById[0].name;
         }
-    },[values,kategoriById]);
+    }, [values, kategoriById]);
 
-
+    /**
+     * Mengirimkan data artikel yang sudah diedit ke fungsi updateArticle.
+     * @param {Event} e - Event form submit.
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         updateArticle(
@@ -42,13 +46,15 @@ const FormArticleEdit = ({values}) => {
         );
     };
 
+    /**
+     * Mengosongkan nilai input setelah artikel diupdate.
+     */
     const handleClear = () => {
         title.current.value = "";
         article.current.value = "";
         image.current.value = "";
         categoris.current.value = "";
     };
-
 
     return (
         <div className="bg-[#686868e7] w-[100%] h-[100vh] py-[10rem]">
@@ -69,8 +75,7 @@ const FormArticleEdit = ({values}) => {
                         {kategori.length > 0 ?
                             kategori.map((val) => (
                                 <option key={val.id} value={val.name}>{val.name}</option>
-                            ))
-                            : null
+                            )) : null
                         }
                     </select>
                 </div>

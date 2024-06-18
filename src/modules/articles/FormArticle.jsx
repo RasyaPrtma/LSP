@@ -2,6 +2,9 @@ import { useRef } from "react";
 import { useArticle } from "./ArticleContext";
 import { useAuth } from "../auth/AuthContext";
 
+/**
+ * Komponen untuk menambahkan artikel baru.
+ */
 const FormArticle = () => {
     const title = useRef();
     const article = useRef();
@@ -11,6 +14,10 @@ const FormArticle = () => {
     const { addArticle, kategori } = useArticle();
     const { token } = useAuth();
 
+    /**
+     * Mengirimkan data artikel baru ke fungsi addArticle.
+     * @param {Event} e - Event form submit.
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -24,6 +31,10 @@ const FormArticle = () => {
         );
     };
 
+
+    /**
+     * Mengosongkan nilai input setelah artikel ditambahkan.
+     */
     const handleClear = () => {
         title.current.value = "";
         article.current.value = "";
@@ -47,6 +58,7 @@ const FormArticle = () => {
                     <label htmlFor="kategori" className="text-[rgba(255,255,255,0.4)]">Kategori</label>
                     <select ref={categoris} className='rounded-sm outline-none border-none form-input text-[rgba(0,0,0,0.6)]' required>
                         <option value="" hidden>KATEGORI</option>
+                        
                         {kategori.length > 0 ?
                             kategori.map((val) => (
                                 <option key={val.id} value={val.name}>{val.name}</option>
