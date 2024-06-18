@@ -51,3 +51,19 @@
 ::-webkit-scrollbar{
   display: none;
 }
+
+.form-input{
+  width: 450px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding:5px 0;
+}
+
+.form-input{
+  background: rgba(255,255,255,0.4);
+}
+
+.form-input.file{
+  background: none;
+}

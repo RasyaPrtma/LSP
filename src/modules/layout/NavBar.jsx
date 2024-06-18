@@ -61,13 +61,13 @@ const NavBar = () => {
 
     return (
         <>
-            <header className="w-[100%] py-[1.8em] fixed top-[0] z-10 left-0 right-0">
+            <header className="w-[100%] py-[1.8em] fixed top-[0] z-[100] left-0 right-0">
                 <nav className="flex justify-between items-center mx-[2.5em]">
                     <NavLink to={"/"} className=" text-[1.5em] font-bold text-[#F8F8F8]">ARTICULATE</NavLink>
                    {
                     IsLogged ? 
                     <>
-                        <NavLink className="font-bold text-[#F8F8F8]">ARTICLE</NavLink>
+                        <NavLink to={"/article"} className="font-bold text-[#F8F8F8]">ARTICLE</NavLink>
                     <div className="flex items-center justify-center gap-[10px]">
                         <NavLink className="font-bold text-[#F8F8F8]">HALO USER</NavLink>
                         <span className="font-bold text-[#F8F8F8]"> | </span>

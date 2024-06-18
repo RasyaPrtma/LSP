@@ -19,7 +19,7 @@ const Home = () => {
 
             fetchArticleImages();
         }
-    }, [article, getImage]);
+    }, [article]);
 
     return (
         <>
@@ -30,7 +30,7 @@ const Home = () => {
                 <div className="absolute top-[35%] bottom-[50%] left-[15vw] z-[10] flex gap-[2rem] items-center">
                     <div className="text">
                         <h1 className='text-[3em] font-bold text-[#F8F8F8]'>WELCOME TO ARTICULATE</h1>
-                        <p className='text-[1em] font-medium text-[#F8F8F8]'>Articulate Adalah Website Untuk Kalian Berbagi Informasi Berupa Artikel Atau Informasi Menarik Lainnya <br />Sehingga Kalian Bisa Berbagi Ilmu Atau Pengetahuan Disini Ayo Coba</p>
+                        <p className='text-[1em] font-medium text-[#F8F8F8]'>Articulate Adalah Website Untuk Mengelola Artikel Sederhana Bisa Berupa Artikel Atau Informasi Menarik Lainnya <br />Sehingga Kalian Bisa Berbagi Ilmu Atau Pengetahuan Disini Ayo Coba</p>
                     </div>
                     <span className='relative layer-img w-[450px] h-[450px] rounded-lg'>
                         <img src={layer} className='width-[100%] h-[100%] object-cover ml-[5em] rounded-xl shadow-2xl shadow-[rgba(255,255,255,0.8)]' />
@@ -61,13 +61,13 @@ const Home = () => {
                         <option value={"DATE_DESC"}>DATE DESC</option>
                     </select>
                 </header>
-                <main className='flex flex-wrap justify-center gap-[3rem] py-[5rem]'>
+                <main className='flex flex-wrap justify-center gap-[3rem] px-[5rem] py-[5rem]'>
                     {
                         article.length > 0 ?
                             article.map((val, index) => (
-                                <ul key={val.id} className='w-[350px] h-[auto] bg-[#5e5e5e] rounded-lg flex flex-col items-center gap-[10px]'>
-                                    <li><img className='w-[350px] h-[300px] object-cover rounded-t-lg' src={imageUrls[index]} alt={"img"} /></li>
-                                    <li className='text-[#0c0e0ce7] uppercase font-semibold text-[1.1em]'>{val.title}</li>
+                                <ul key={val.id} className='w-[auto] h-[auto] bg-[#5e5e5e] rounded-lg flex flex-col flex-wrap justify-center items-center gap-[10px] pb-[3rem]'>
+                                    <li className=''><img className='w-[auto] h-[300px] object-cover rounded-t-lg' src={imageUrls[index]} alt={"img"} /></li>
+                                    <li className='text-[#0c0e0ce7] uppercase font-semibold text-[1.1em] w-[100%] text-center'>{val.title}</li>
                                     <li className='text-[#0c0e0ce7] font-medium text-[1.10em] text-center'>{val.article}</li>
                                     <li className='text-[#0c0e0ce7] font-thin text-[14px]'>Uploaded At : {val.uploaded_at}</li>
                                 </ul>

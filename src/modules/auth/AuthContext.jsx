@@ -12,6 +12,7 @@ const initContext = {
     doRegist: () => {},
     doLogout: () => {},
     IsLogged: true,
+    token: null
 }
 
 const AuthContext = createContext(initContext);
@@ -22,6 +23,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({children}) => {
     const [IsLogged,setIsLogged] = useState(false);
+    const [token,setToken] = useState(null);
 
     const doLogin = async (email,password,clear,close) => {
         const api = await axios.post((HTTP + "login"),{
@@ -83,13 +85,14 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         const token = Cookies.get("SESSION_TOKEN");
         if(token !== undefined){
+            setToken(token);
             setIsLogged(true);
         }
     },[])
 
     return(
     <>
-        <AuthContext.Provider value={{doLogin,doRegist,doLogout,IsLogged}}>
+        <AuthContext.Provider value={{doLogin,doRegist,doLogout,IsLogged,token}}>
             {children}
         </AuthContext.Provider>
     </>);
