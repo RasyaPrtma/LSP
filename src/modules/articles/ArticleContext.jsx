@@ -300,6 +300,7 @@ export const ArticleProvider = ({ children }) => {
       getUserArticle(token);
     } else {
       const { data } = api;
+      alert(data.message);
       console.log("Error", data);
     }
   };
@@ -386,6 +387,8 @@ export const ArticleProvider = ({ children }) => {
       getUserArticle(token);
       getAll();
     } else {
+      const { data } = api;
+      alert(data.message);
       console.log("Error", api);
     }
   };
@@ -417,6 +420,8 @@ export const ArticleProvider = ({ children }) => {
       getAll();
       getUserArticle(token);
     } else {
+      const { data } = api;
+      alert(data.message);
       console.log("Error", api);
     }
   };
