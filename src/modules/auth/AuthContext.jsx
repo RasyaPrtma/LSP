@@ -49,7 +49,7 @@ export const useAuth = () => {
  */
 export const AuthProvider = ({ children }) => {
   const [IsLogged, setIsLogged] = useState(false);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(Cookies.get("SESSION_TOKEN"));
   const [nameUser, setNameUser] = useState("");
 
   /**
@@ -138,14 +138,14 @@ export const AuthProvider = ({ children }) => {
    * Efek samping untuk memeriksa token pada Cookies saat komponen dimuat.
    */
   useEffect(() => {
-    const tok = Cookies.get("SESSION_TOKEN");
+    const getToken = Cookies.get("SESSION_TOKEN");
     const username = Cookies.get("SESSION_USER");
-    if (tok !== undefined) {
+    if (getToken !== undefined) {
       setToken(token);
       setIsLogged(true);
       setNameUser(username);
     }
-  }, [IsLogged]);
+  }, [token]);
 
   return (
     <AuthContext.Provider

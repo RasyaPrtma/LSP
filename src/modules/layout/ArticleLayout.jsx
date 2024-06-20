@@ -20,7 +20,9 @@ const ArticleLayout = () => {
    * @returns {void}
    */
   useEffect(() => {
-    getUserArticle(token);
+    if (token !== null) {
+      getUserArticle(token);
+    }
   }, []);
 
   return (
