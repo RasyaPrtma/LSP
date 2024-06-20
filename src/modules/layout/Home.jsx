@@ -92,31 +92,40 @@ const Home = () => {
         </header>
         <main className="flex flex-wrap justify-center gap-[3rem] px-[5rem] py-[5rem]">
           {article.length > 0
-            ? article.map((val, index) => (
-                <ul
-                  key={val.id}
-                  className="w-[500px] h-[100%] bg-[#5e5e5e] rounded-lg flex flex-col pb-[2em] items-center relative"
-                >
-                  <li className="">
-                    <img
-                      className="w-[500px] h-[300px] object-cover rounded-t-lg"
-                      src={imageUrls[index]}
-                      alt={"img"}
-                    />
-                  </li>
-                  <div className="flex flex-col items-center px-[2rem] py-[20px]">
-                    <li className="text-[#0c0e0ce7] uppercase font-semibold text-[1.1em] text-[#f8f8f8] w-[100%] text-center">
-                      {val.title}
+            ? article.map((val, index) => {
+                const uploadedDate = new Date(val.uploaded_at);
+                const formattedDate = uploadedDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                });
+
+                return (
+                  <ul
+                    key={val.id}
+                    className="w-[500px] h-[100%] bg-[#5e5e5e] rounded-lg flex flex-col pb-[2em] items-center relative"
+                  >
+                    <li className="">
+                      <img
+                        className="w-[500px] h-[300px] object-cover rounded-t-lg"
+                        src={imageUrls[index]}
+                        alt={"img"}
+                      />
                     </li>
-                    <li className="text-[#0c0e0ce7] font-medium text-[1.10em] text-[#f8f8f8] text-center">
-                      {val.article}
+                    <div className="flex flex-col items-center px-[2rem] py-[20px]">
+                      <li className="text-[#0c0e0ce7] uppercase font-semibold text-[1.1em] text-[#f8f8f8] w-[100%] text-center">
+                        {val.title}
+                      </li>
+                      <li className="text-[#0c0e0ce7] font-medium text-[1.10em] text-[#f8f8f8] text-center">
+                        {val.article}
+                      </li>
+                    </div>
+                    <li className="text-[#0c0e0ce7] font-thin text-[14px] text-[#f8f8f8] absolute bottom-[15px]">
+                      Uploaded At : {formattedDate}
                     </li>
-                  </div>
-                  <li className="text-[#0c0e0ce7] font-thin text-[14px] text-[#f8f8f8] absolute bottom-[15px]">
-                    Uploaded At : {val.uploaded_at}
-                  </li>
-                </ul>
-              ))
+                  </ul>
+                );
+              })
             : null}
         </main>
       </section>
