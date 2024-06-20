@@ -95,7 +95,7 @@ const Home = () => {
             ? article.map((val, index) => (
                 <ul
                   key={val.id}
-                  className="w-[500px] h-[auto] bg-[#5e5e5e] rounded-lg flex flex-col flex-wrap justify-center items-center gap-[10px] pb-[3rem]"
+                  className="w-[500px] h-[100%] bg-[#5e5e5e] rounded-lg flex flex-col pb-[2em] items-center relative"
                 >
                   <li className="">
                     <img
@@ -104,13 +104,15 @@ const Home = () => {
                       alt={"img"}
                     />
                   </li>
-                  <li className="text-[#0c0e0ce7] uppercase font-semibold text-[1.1em] text-[#f8f8f8] w-[100%] text-center">
-                    {val.title}
-                  </li>
-                  <li className="text-[#0c0e0ce7] font-medium text-[1.10em] text-[#f8f8f8] text-center">
-                    {val.article}
-                  </li>
-                  <li className="text-[#0c0e0ce7] font-thin text-[14px] text-[#f8f8f8]">
+                  <div className="flex flex-col items-center px-[2rem] py-[20px]">
+                    <li className="text-[#0c0e0ce7] uppercase font-semibold text-[1.1em] text-[#f8f8f8] w-[100%] text-center">
+                      {val.title}
+                    </li>
+                    <li className="text-[#0c0e0ce7] font-medium text-[1.10em] text-[#f8f8f8] text-center">
+                      {val.article}
+                    </li>
+                  </div>
+                  <li className="text-[#0c0e0ce7] font-thin text-[14px] text-[#f8f8f8] absolute bottom-[15px]">
                     Uploaded At : {val.uploaded_at}
                   </li>
                 </ul>

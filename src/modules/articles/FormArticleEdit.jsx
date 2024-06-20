@@ -102,6 +102,7 @@ const FormArticleEdit = ({ values }) => {
           <select
             ref={categoris}
             className="rounded-sm outline-none border-none form-input text-[rgba(0,0,0,0.6)]"
+            required
           >
             <option value="" hidden>
               KATEGORI
