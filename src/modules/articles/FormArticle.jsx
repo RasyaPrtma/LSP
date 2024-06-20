@@ -60,7 +60,7 @@ const FormArticle = () => {
             id="title"
             type="text"
             required
-            minLength={20}
+            minLength={10}
           />
         </div>
         <div className="flex flex-col">

@@ -80,7 +80,7 @@ const FormArticleEdit = ({ values }) => {
             className="form-input"
             id="title"
             type="text"
-            minLength={20}
+            minLength={10}
           />
         </div>
         <div className="flex flex-col">
