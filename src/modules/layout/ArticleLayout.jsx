@@ -21,7 +21,7 @@ const ArticleLayout = () => {
    */
   useEffect(() => {
     getUserArticle(token);
-  }, [token]);
+  }, []);
 
   return (
     <>
