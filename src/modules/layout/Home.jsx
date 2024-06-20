@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import video from "../../assets/bg.mp4";
 import layer from "../../assets/layer.jpg";
