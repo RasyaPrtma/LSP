@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
