@@ -416,7 +416,6 @@ export const ArticleProvider = ({ children }) => {
     if (api.status === 200) {
       const { data } = api;
       alert(data.message);
-      getUserArticle(token);
       getAll();
       getUserArticle(token);
     } else {

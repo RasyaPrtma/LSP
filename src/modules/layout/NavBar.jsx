@@ -109,7 +109,7 @@ const NavBar = () => {
           {IsLogged ? (
             <>
               <NavLink to={"/article"} className="font-bold text-[#F8F8F8]">
-                ARTICLE
+                CREATE ARTICLE
               </NavLink>
               <div className="flex items-center justify-center gap-[10px]">
                 <NavLink className="font-bold text-[#F8F8F8]">

@@ -28,7 +28,7 @@
 
 .layer-img::after{
   content: "";
-  width: 318px;
+  width: 319px;
   height: 100%;
   position: absolute;
   top: 0;

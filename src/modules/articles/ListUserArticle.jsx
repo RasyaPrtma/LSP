@@ -41,6 +41,8 @@ const ListUserArticle = ({ token, userArticle, getImage, Edit }) => {
     }
   };
 
+  console.log(userArticle);
+
   return (
     <>
       <main className="bg-[#272727] flex flex-wrap justify-center gap-[3rem] px-[5rem] py-[5rem]">

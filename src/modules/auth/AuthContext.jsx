@@ -70,6 +70,7 @@ export const AuthProvider = ({ children }) => {
         const { data } = api.data;
         Cookies.set("SESSION_TOKEN", data.token, { expires: 7 });
         Cookies.set("SESSION_USER", data.username);
+        setToken(data.token);
         setNameUser(data.username);
         setIsLogged(true);
         close();
@@ -127,6 +128,8 @@ export const AuthProvider = ({ children }) => {
    */
   const doLogout = () => {
     setIsLogged(false);
+    setToken(null);
+    Cookies.remove("SESSION_USER");
     return Cookies.remove("SESSION_TOKEN", { expires: 7 });
   };
 
@@ -134,14 +137,14 @@ export const AuthProvider = ({ children }) => {
    * Efek samping untuk memeriksa token pada Cookies saat komponen dimuat.
    */
   useEffect(() => {
-    const token = Cookies.get("SESSION_TOKEN");
+    const tok = Cookies.get("SESSION_TOKEN");
     const username = Cookies.get("SESSION_USER");
-    if (token !== undefined) {
+    if (tok !== undefined) {
       setToken(token);
       setIsLogged(true);
       setNameUser(username);
     }
-  }, []);
+  }, [IsLogged]);
 
   return (
     <AuthContext.Provider

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ListUserArticle from "../articles/ListUserArticle";
 import NavBar from "./NavBar";
 import { useArticle } from "../articles/ArticleContext";
@@ -11,29 +12,39 @@ import FormArticleEdit from "../articles/FormArticleEdit";
  * @returns {JSX.Element} Komponen tata letak artikel.
  */
 const ArticleLayout = () => {
+  const { getUserArticle, userArticle, getImage, Edit, editId } = useArticle();
+  const { token } = useAuth();
 
-    const { getUserArticle, userArticle, getImage, Edit, editId } = useArticle();
-    const { token } = useAuth();
+  /**
+   * Mengambil artikel pengguna saat komponen dimuat.
+   * @returns {void}
+   */
+  useEffect(() => {
+    getUserArticle(token);
+  }, [token]);
 
-    /**
-     * Mengambil artikel pengguna saat komponen dimuat.
-     * @returns {void}
-     */
-    useEffect(() => {
-        getUserArticle(token);
-    }, []);
-
-    return (
-        <>
-            <NavBar />
-            {editId !== null ? (
-                <FormArticleEdit values={userArticle.length > 0 ? userArticle.find((data) => data.id === editId) : null} />
-            ) : (
-                <FormArticle />
-            )}
-            <ListUserArticle token={token} userArticle={userArticle} Edit={Edit} getImage={getImage} />
-        </>
-    );
+  return (
+    <>
+      <NavBar />
+      {editId !== null ? (
+        <FormArticleEdit
+          values={
+            userArticle.length > 0
+              ? userArticle.find((data) => data.id === editId)
+              : null
+          }
+        />
+      ) : (
+        <FormArticle />
+      )}
+      <ListUserArticle
+        token={token}
+        userArticle={userArticle}
+        Edit={Edit}
+        getImage={getImage}
+      />
+    </>
+  );
 };
 
 export default ArticleLayout;
