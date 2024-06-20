@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: NavBar.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: NavBar.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
+
+/**
+ * Komponen navigasi utama (NavBar) untuk aplikasi.
+ * Menampilkan navigasi berdasarkan status login pengguna.
+ * Memiliki fitur login, registrasi, dan logout.
+ * Menggunakan konteks Auth untuk manajemen autentikasi.
+ * @returns {JSX.Element} Komponen navigasi utama.
+ */
+const NavBar = () => {
+    const { doLogin, doRegist, doLogout, IsLogged } = useAuth();
+
+    const name = useRef();
+    const email = useRef();
+    const username = useRef();
+    const password = useRef();
+
+    const [loginClick, setLoginClick] = useState(false);
+    const [registClick, setRegistClick] = useState(false);
+
+    /**
+     * Menangani klik untuk menampilkan form login.
+     */
+    const handleLoginClick = () => {
+        setLoginClick(true);
+        setRegistClick(false);
+    }
+
+    /**
+     * Menangani klik untuk menampilkan form registrasi.
+     */
+    const handleRegisterClick = () => {
+        setRegistClick(true);
+        setLoginClick(false);
+    }
+
+    /**
+     * Menutup form login atau registrasi.
+     */
+    const handleClose = () => {
+        setLoginClick(false);
+        setRegistClick(false);
+    }
+
+    /**
+     * Menangani submit form login.
+     * @param {Event} e - Objek event dari form submit.
+     */
+    const handleSubmitLogin = (e) => {
+        e.preventDefault();
+        doLogin(email.current.value, password.current.value, handleClear, handleClose);
+    }
+
+    /**
+     * Menangani submit form registrasi.
+     * @param {Event} e - Objek event dari form submit.
+     */
+    const handleSubmitRegist = (e) => {
+        e.preventDefault();
+        doRegist(name.current.value, username.current.value, email.current.value, password.current.value, handleClear, handleClose);
+    }
+
+    /**
+     * Mengosongkan nilai input pada form login atau registrasi.
+     */
+    const handleClear = () => {
+        if (loginClick) {
+            email.current.value = '';
+            password.current.value = '';
+        } else if (registClick) {
+            email.current.value = '';
+            password.current.value = '';
+            name.current.value = '';
+            username.current.value = '';
+        }
+    }
+
+    /**
+     * Menangani logout pengguna setelah konfirmasi.
+     */
+    const handleLogout = () => {
+        const answer = window.confirm('Yakin');
+        if (answer) {
+            doLogout();
+        }
+    }
+
+    return (
+        &lt;>
+            &lt;header className="w-[100%] py-[1.8em] fixed top-[0] z-[100] left-0 right-0">
+                &lt;nav className="flex justify-between items-center mx-[2.5em]">
+                    &lt;NavLink to={"/"} className="text-[1.5em] font-bold text-[#F8F8F8]">ARTICULATE&lt;/NavLink>
+                    {
+                        IsLogged ?
+                            &lt;>
+                                &lt;NavLink to={"/article"} className="font-bold text-[#F8F8F8]">ARTICLE&lt;/NavLink>
+                                &lt;div className="flex items-center justify-center gap-[10px]">
+                                    &lt;NavLink className="font-bold text-[#F8F8F8]">HALO USER&lt;/NavLink>
+                                    &lt;span className="font-bold text-[#F8F8F8]"> | &lt;/span>
+                                    &lt;NavLink onClick={handleLogout} className="font-bold text-[#F8F8F8]">LOG OUT&lt;/NavLink>
+                                &lt;/div>
+                            &lt;/>
+                            :
+                            &lt;div>
+                                &lt;NavLink onClick={handleLoginClick} className="font-bold text-[#F8F8F8]">LOGIN&lt;/NavLink>
+                                &lt;span className="font-bold text-[#F8F8F8]"> | &lt;/span>
+                                &lt;NavLink onClick={handleRegisterClick} className="font-bold text-[#F8F8F8]">SIGN UP&lt;/NavLink>
+                            &lt;/div>
+                    }
+                &lt;/nav>
+            &lt;/header>
+
+            {
+                loginClick ?
+                    &lt;form onSubmit={(e) => handleSubmitLogin(e)} className="fixed top-[5vw] right-[5vw] z-[20] bg-[rgba(255,255,255,0.5)] w-[300px] h-[300px] rounded-md flex justify-center flex-col items-center">
+                        &lt;span className="cursor-pointer absolute top-[20px] left-[25px] text-[14px] text-[rgba(255,255,255,0.8)]" onClick={handleClose}>&lt;i className="fa-solid fa-x">&lt;/i>&lt;/span>
+                        &lt;h1 className="text-[1.4em] font-bold text-[rgba(255,255,255,0.8)]">Login&lt;/h1>
+                        &lt;div className="flex flex-col mb-[1em]">
+                            &lt;label htmlFor="email" className="text-[14px] text-[rgba(255,255,255,0.8)]">Email&lt;/label>
+                            &lt;input autoComplete="off" ref={email} type="email" id="email" className="w-[250px] rounded-sm border-[none] outline-none pl-2 text-[14px] py-[5px] text-[rgba(0,0,0,0.5)]" required />
+                        &lt;/div>
+                        &lt;div className="flex flex-col mb-[1em]">
+                            &lt;label htmlFor="password" className="text-[14px] text-[rgba(255,255,255,0.8)]">Password&lt;/label>
+                            &lt;input autoComplete="off" ref={password} type="password" className="w-[250px] rounded-sm border-[none] outline-none pl-2 text-[14px] py-[5px] text-[rgba(0,0,0,0.5)]" id="password" required />
+                        &lt;/div>
+                        &lt;button type="submit" className="bg-[rgba(0,0,0,0.2)] text-[rgba(255,255,255,0.8)] text-[14px] px-[15px] py-[6px] rounded-md">Submit&lt;/button>
+                    &lt;/form>
+                    : null
+            }
+
+            {
+                registClick ?
+                    &lt;form onSubmit={(e) => handleSubmitRegist(e)} className="fixed top-[5vw] right-[5vw] z-[20] bg-[rgba(255,255,255,0.5)] w-[350px] h-[400px] rounded-md flex justify-center flex-col items-center">
+                        &lt;span className="cursor-pointer absolute top-[20px] left-[25px] text-[14px] text-[rgba(255,255,255,0.8)]" onClick={handleClose}>&lt;i className="fa-solid fa-x">&lt;/i>&lt;/span>
+                        &lt;h1 className="text-[1.4em] font-bold text-[rgba(255,255,255,0.8)]">Registrasi&lt;/h1>
+                        &lt;div className="flex flex-col mb-[1em]">
+                            &lt;label htmlFor="name" className="text-[14px] text-[rgba(255,255,255,0.8)]">Name&lt;/label>
+                            &lt;input autoComplete="off" ref={name} type="text" id="name" className="w-[250px] rounded-sm border-[none] outline-none pl-2 text-[14px] py-[5px] text-[rgba(0,0,0,0.5)]" required />
+                        &lt;/div>
+                        &lt;div className="flex flex-col mb-[1em]">
+                            &lt;label htmlFor="username" className="text-[14px] text-[rgba(255,255,255,0.8)]">Username&lt;/label>
+                            &lt;input autoComplete="off" ref={username} type="text" className="w-[250px] rounded-sm border-[none] outline-none pl-2 text-[14px] py-[5px] text-[rgba(0,0,0,0.5)]" id="username" required />
+                        &lt;/div>
+                        &lt;div className="flex flex-col mb-[1em]">
+                            &lt;label htmlFor="email" className="text-[14px] text-[rgba(255,255,255,0.8)]">Email&lt;/label>
+                            &lt;input autoComplete="off" ref={email} type="email" className="w-[250px] rounded-sm border-[none] outline-none pl-2 text-[14px] py-[5px] text-[rgba(0,0,0,0.5)]" id="email" required />
+                        &lt;/div>
+                        &lt;div className="flex flex-col mb-[1em]">
+                            &lt;label htmlFor="password" className="text-[14px] text-[rgba(255,255,255,0.8)]">Password&lt;/label>
+                            &lt;input autoComplete="off" ref={password} type="password" className="w-[250px] rounded-sm border-[none] outline-none pl-2 text-[14px] py-[5px] text-[rgba(0,0,0,0.5)]" id="password" required />
+                        &lt;/div>
+                        &lt;button type="submit" className="bg-[rgba(0,0,0,0.2)] text-[rgba(255,255,255,0.8)] text-[14px] px-[15px] py-[6px] rounded-md">Submit&lt;/button>
+                    &lt;/form>
+                    : null
+            }
+        &lt;/>
+    );
+}
+
+export default NavBar
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ArticleLayout">ArticleLayout</a></li><li><a href="global.html#NavBar">NavBar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 20 2024 09:33:25 GMT+0700 (Western Indonesia Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
