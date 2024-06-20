@@ -177,7 +177,6 @@ export const ArticleProvider = ({ children }) => {
    * @returns {void}
    */
   const handleFilter = (kategori) => {
-    console.log(kategori);
     if (kategori !== "") {
       filterArticle(kategori);
       setFiltered(true);
@@ -217,6 +216,7 @@ export const ArticleProvider = ({ children }) => {
    * @returns {void}
    */
   const handleSort = (type) => {
+    console.log(type);
     if (type !== "") {
       if (type == "ASC" || type == "DESC") {
         sortArticle("title", type);
@@ -227,10 +227,10 @@ export const ArticleProvider = ({ children }) => {
       } else if (type == "DATE_DESC") {
         sortArticle("uploaded_at", "DESC");
         setSort(true);
-      } else {
-        setSort(false);
-        getAll();
       }
+    } else {
+      getAll();
+      setSort(false);
     }
   };
 
